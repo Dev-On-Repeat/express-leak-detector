@@ -4,6 +4,14 @@
   "description": "A zombie request finder for Express. Detects hanging requests and logs a detailed middleware execution breadcrumb trace.",
   "main": "index.js",
   "types": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ypranay3232/express-leak-detector.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ypranay3232/express-leak-detector/issues"
+  },
+  "homepage": "https://github.com/ypranay3232/express-leak-detector#readme",
   "scripts": {
     "test": "node test.js"
   },
