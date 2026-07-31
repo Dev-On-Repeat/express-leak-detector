@@ -1,0 +1,6 @@
+node_modules/
+test.js
+demo.js
+package-lock.json
+.gitignore
+.npmignore

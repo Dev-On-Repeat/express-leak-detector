@@ -1,0 +1,29 @@
+{
+  "name": "express-leak-detector",
+  "version": "1.0.0",
+  "description": "A zombie request finder for Express. Detects hanging requests and logs a detailed middleware execution breadcrumb trace.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "express",
+    "leak",
+    "detector",
+    "zombie",
+    "request",
+    "timeout",
+    "middleware",
+    "apm",
+    "debug"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "express": "^4.0.0 || ^5.0.0"
+  },
+  "devDependencies": {
+    "express": "^4.22.2"
+  }
+}
