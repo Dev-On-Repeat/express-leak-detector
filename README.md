@@ -1,10 +1,12 @@
 # express-leak-detector (The Zombie Request Finder)
 
+Stop letting forgotten next() or res.send() calls hang your server. This lightweight Express.js utility detects zombie requests in real-time. It maps your middleware execution paths and prints a clean, color-coded breadcrumb trace that pinpoints the exact filename, line, and column of the leak.
+
 A robust, developer-friendly diagnostic tool for Express.js that detects **zombie requests** (hanging requests caused by forgotten `res.send()` or `next()` calls). It tracks execution paths and outputs a clean, color-coded **execution breadcrumb trace** pointing to the exact filename, line, and column of the hanging middleware.
 
 ---
 
-## 💡 The Invisible Pain Point
+## The Invisible Pain Point
 
 In Express, a single misplaced `if/else` block where a developer forgets to respond or call `next()` causes the socket to hang indefinitely. It drains memory, consumes file descriptors, and eventually triggers unexplainable server timeouts under production loads. 
 
@@ -12,17 +14,17 @@ While typical APM tools (Datadog, New Relic) can report that a route is slow or 
 
 ---
 
-## ✨ Features
+##  Features
 
-- 🔍 **Line-Level Diagnostics**: Captures call stack locations at registration time to tell you exactly where the culprit middleware was defined.
-- ⚡ **Zero-Config Streaming Safety**: Automatically overrides response stream methods (`res.write` and `res.writeHead`) to prevent false positives for Server-Sent Events (SSE) and streamed responses.
-- 🕒 **Event Loop Safe**: Uses `unref` on active timeout timers so they do not block Node's process exit or test suites.
-- 🛠️ **Custom Reporters**: Exposes an `onLeak` callback to redirect warning payloads to your APM tool (e.g. Sentry, Slack alerts, Datadog).
-- 🧩 **Comprehensive Coverage**: Hooks into `router.use`, `router.param`, and all HTTP verb routes (like `router.get`, `router.post`, etc.).
+-  **Line-Level Diagnostics**: Captures call stack locations at registration time to tell you exactly where the culprit middleware was defined.
+-  **Zero-Config Streaming Safety**: Automatically overrides response stream methods (`res.write` and `res.writeHead`) to prevent false positives for Server-Sent Events (SSE) and streamed responses.
+-  **Event Loop Safe**: Uses `unref` on active timeout timers so they do not block Node's process exit or test suites.
+-  **Custom Reporters**: Exposes an `onLeak` callback to redirect warning payloads to your APM tool (e.g. Sentry, Slack alerts, Datadog).
+-  **Comprehensive Coverage**: Hooks into `router.use`, `router.param`, and all HTTP verb routes (like `router.get`, `router.post`, etc.).
 
 ---
 
-## 📦 Installation
+##  Installation
 
 ```bash
 npm install express-leak-detector
@@ -30,7 +32,7 @@ npm install express-leak-detector
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 Initialize the leak detector **before** registering any routes or middlewares:
 
@@ -68,7 +70,7 @@ app.listen(3000);
 When `/api/users` hangs, `express-leak-detector` will output this to the terminal:
 
 ```ansi
-⚠️  [EXPRESS LEAK DETECTOR] ZOMBIE REQUEST DETECTED
+  [EXPRESS LEAK DETECTOR] ZOMBIE REQUEST DETECTED
 ================================================================
 Request Method: GET
 Request URL:    /api/users
@@ -87,7 +89,7 @@ Execution Breadcrumbs:
 
 ---
 
-## ⚙️ Configuration Options
+##  Configuration Options
 
 Initialize the detector by calling `initLeakDetector(options)`:
 
@@ -98,7 +100,7 @@ Initialize the detector by calling `initLeakDetector(options)`:
 | `excludePaths` | `Array<string \| RegExp>` | `[]` | Exact paths, prefixes, or regex patterns to bypass tracking (e.g. `['/socket.io', /^\/assets/ ]`). |
 | `onLeak` | `Function` | `null` | A custom callback function called when a leak is detected. Prevents default logging. |
 
-### 🛠️ Example: Custom APM Reporting (Slack / Sentry)
+###  Example: Custom APM Reporting (Slack / Sentry)
 
 Instead of logging to the terminal, you can send the trace payloads to Sentry or Slack:
 
@@ -156,7 +158,7 @@ The `leakInfo` object has the following format:
 
 ---
 
-## 🔍 How It Works Under the Hood
+##  How It Works Under the Hood
 
 1. **Monkey Patching**:
    On initialization, the library patches Express's `Router.use`, `Router.param`, and verb methods (`Route.prototype[method]`). This intercepts all middleware/handler registrations without modifying your server logic.
@@ -168,6 +170,6 @@ The `leakInfo` object has the following format:
    - If a streaming response starts writing (`writeHead` or `write`), the timer is automatically canceled to avoid false alarms.
    - If the timer ticks past the threshold, the leak reporter triggers with the recorded history.
 
-## 📄 License
+##  License
 
 MIT
