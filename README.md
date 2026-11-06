@@ -1,5 +1,9 @@
 # express-leak-detector (The Zombie Request Finder)
 
+[![npm version](https://img.shields.io/npm/v/express-leak-detector?color=cb3837&style=flat-square)](https://www.npmjs.com/package/express-leak-detector)
+[![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-@dev--on--repeat/express--leak--detector-blue?logo=github&style=flat-square)](https://github.com/Dev-On-Repeat/express-leak-detector/packages)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
+
 Stop letting forgotten next() or res.send() calls hang your server. This lightweight Express.js utility detects zombie requests in real-time. It maps your middleware execution paths and prints a clean, color-coded breadcrumb trace that pinpoints the exact filename, line, and column of the leak.
 
 A robust, developer-friendly diagnostic tool for Express.js that detects **zombie requests** (hanging requests caused by forgotten `res.send()` or `next()` calls). It tracks execution paths and outputs a clean, color-coded **execution breadcrumb trace** pointing to the exact filename, line, and column of the hanging middleware.
@@ -26,8 +30,14 @@ While typical APM tools (Datadog, New Relic) can report that a route is slow or 
 
 ##  Installation
 
+**From npm:**
 ```bash
 npm install express-leak-detector
+```
+
+**From GitHub Packages:**
+```bash
+npm install @dev-on-repeat/express-leak-detector
 ```
 
 ---
